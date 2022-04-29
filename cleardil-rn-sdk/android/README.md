@@ -24,7 +24,7 @@ rm -rf node_modules/ && yarn && cd .. && watchman watch-del-all && npx react-nat
 
 In a second console, from the `TestApp/` directory, update the Android package and launch the virtual device.  Run this each time you change Android code.
 ```shell
-rsync -av ../ node_modules/@onfido/react-native-sdk/ --exclude=TestApp --exclude=SampleApp --exclude=node_modules --exclude=android/build --exclude=.git && npx react-native run-android
+rsync -av ../ node_modules/alpha-cd/cleardil-rn-plugin-sdk-/ --exclude=TestApp --exclude=SampleApp --exclude=node_modules --exclude=android/build --exclude=.git && npx react-native run-android
 ```
 
 How to run the tests
