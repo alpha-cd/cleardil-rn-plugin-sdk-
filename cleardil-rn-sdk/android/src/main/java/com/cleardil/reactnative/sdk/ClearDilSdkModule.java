@@ -10,36 +10,20 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.UnexpectedNativeTypeException;
-
 import java.util.List;
 import java.util.ArrayList;
-
-import com.onfido.android.sdk.capture.Onfido;
-import com.onfido.android.sdk.capture.EnterpriseFeatures;
-import com.onfido.android.sdk.capture.ui.options.FlowStep;
-import com.onfido.android.sdk.capture.OnfidoConfig;
-import com.onfido.android.sdk.capture.OnfidoFactory;
-import com.onfido.android.sdk.capture.ui.camera.face.FaceCaptureStep;
-import com.onfido.android.sdk.capture.ui.camera.face.FaceCaptureVariant;
-import com.onfido.android.sdk.capture.DocumentType;
-import com.onfido.android.sdk.capture.utils.CountryCode;
-import com.onfido.android.sdk.capture.ui.options.CaptureScreenStep;
-import com.onfido.android.sdk.capture.errors.*;
-
 import io.flutter.embedding.android.FlutterActivity;
 
 public class ClearDilSdkModule extends ReactContextBaseJavaModule {
 
     private final ReactApplicationContext reactContext;
-    /* package */ final Onfido client;
     private Promise currentPromise = null;
     private final ClearDilSdkActivityEventListener activityEventListener;
 
     public ClearDilSdkModule(final ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
-        this.client = OnfidoFactory.create(reactContext).getClient();
-        this.activityEventListener = new ClearDilSdkActivityEventListener(client);
+        this.activityEventListener = new ClearDilSdkActivityEventListener();
         reactContext.addActivityEventListener(activityEventListener);
     }
 
@@ -71,7 +55,6 @@ public class ClearDilSdkModule extends ReactContextBaseJavaModule {
 
         try {
             final String sdkToken;
-            final FlowStep[] flowStepsWithOptions;
             ReadableMap captureDocument = null;
             ReadableMap captureLicence=null;
             ReadableMap captureIdentity=null;
@@ -80,7 +63,6 @@ public class ClearDilSdkModule extends ReactContextBaseJavaModule {
             Boolean isCaptureNationalCard=false;
             try {
                 sdkToken = getSdkTokenFromConfig(config);
-//                flowStepsWithOptions = getFlowStepsFromConfig(config);
 
                 final ReadableMap flowSteps = config.getMap("flowSteps");
 
@@ -255,16 +237,7 @@ public class ClearDilSdkModule extends ReactContextBaseJavaModule {
 
 
 
-    public static CountryCode findCountryCodeByAlpha2(String countryCodeString) {
-        CountryCode countryCode = null;
-        // We'll use a loop to find the value, because streams are not supported in Java 7.
-        for (CountryCode cc : CountryCode.values()) {
-            if (cc.name().equals(countryCodeString)) {
-                countryCode = cc;
-            }
-        }
-        return countryCode;
-    }
+
 
     private boolean getBooleanFromConfig(ReadableMap config, String key) {
         return config.hasKey(key) && config.getBoolean(key);

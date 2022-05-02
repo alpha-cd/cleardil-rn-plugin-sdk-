@@ -1,15 +1,8 @@
-com/cleardil/reactnative/sdk/ClearDilSdkPackage.java
- com.cleardil.reactnative.sdk.ClearDilSdkPackage
 com/cleardil/reactnative/sdk/Response.java
  com.cleardil.reactnative.sdk.Response
  com.cleardil.reactnative.sdk.Response$Document
  com.cleardil.reactnative.sdk.Response$Face
  com.cleardil.reactnative.sdk.Response$Identifiable
-com/cleardil/reactnative/sdk/ClearDilSdkActivityEventListener.java
- com.cleardil.reactnative.sdk.ClearDilSdkActivityEventListener
- com.cleardil.reactnative.sdk.ClearDilSdkActivityEventListener$1
-com/cleardil/reactnative/sdk/ReactNativeBridgeUtils.java
- com.cleardil.reactnative.sdk.ReactNativeBridgeUtiles
 com/cleardil/reactnative/sdk/ClearDilSdkModule.java
  com.cleardil.reactnative.sdk.ClearDilSdkModule
  com.cleardil.reactnative.sdk.ClearDilSdkModule$1
@@ -20,3 +13,9 @@ com/cleardil/reactnative/sdk/ClearDilSdkModule.java
  com.cleardil.reactnative.sdk.ClearDilSdkModule$6
  com.cleardil.reactnative.sdk.ClearDilSdkModule$7
  com.cleardil.reactnative.sdk.ClearDilSdkModule$8
+com/cleardil/reactnative/sdk/ClearDilSdkPackage.java
+ com.cleardil.reactnative.sdk.ClearDilSdkPackage
+com/cleardil/reactnative/sdk/ReactNativeBridgeUtils.java
+ com.cleardil.reactnative.sdk.ReactNativeBridgeUtiles
+com/cleardil/reactnative/sdk/ClearDilSdkActivityEventListener.java
+ com.cleardil.reactnative.sdk.ClearDilSdkActivityEventListener
