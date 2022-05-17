@@ -190,15 +190,13 @@ When using React Native version <= 0.64.0 there is a dependency conflict with ok
 
 ```
 android {
-    configurations.all {
-        resolutionStrategy {
-            eachDependency { DependencyResolveDetails details ->
-                if (!details.requested.name.contains('onfido')) {
-                    if (details.requested.group == 'com.squareup.okhttp3') {
-                        details.useVersion '4.9.0'
-                    }
-                }
-            }
+    String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
+    repositories {
+        maven {
+            url "$storageUrl/download.flutter.io"
+        }
+        maven {
+            url "${artifactory_contextUrl}/cleardil-gradle-release"
         }
     }
 }
