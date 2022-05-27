@@ -1,5 +1,5 @@
-![npm](https://img.shields.io/npm/v/@onfido/react-native-sdk?color=%47b801)
-![NPM](https://img.shields.io/npm/l/@onfido/react-native-sdk?color=%47b801)
+![npm](https://img.shields.io/npm/v/alpha-cd/cleardil-rn-plugin-sdk-?color=%47b801)
+![NPM](https://img.shields.io/npm/l/alpha-cd/cleardil-rn-plugin-sdk-?color=%47b801)
 ![Build Status](https://app.bitrise.io/app/8e301f076fdc3e94/status.svg?token=7lDTdIn1dfL81q2VwjUpFA&branch=master)
 
 ## Table of contents
@@ -114,7 +114,7 @@ You cannot use this SDK with Expo: If your project already uses Expo, you will n
 Navigate to the root directory of your React Native project. The rest of this section (section 4) will assume you are in the root directory. Run the following command:
 
 ```shell
-$ npm install alpha-cd/cleardil-rn-plugin-sdk- --save
+$ npm install https://github.com/alpha-cd/cleardil-rn-plugin-sdk- --save
 ```
 
 #### 4.2 Update your Android build.gradle files
@@ -130,23 +130,70 @@ $ npm --prefix node_modules/alpha-cd/cleardil-rn-plugin-sdk-/ run updateBuildGra
 
 If you want to manually update your build files, you can follow the steps the script takes:
 
+First you will need to specify your credentials to Cleardil artifactory repository in the gradle.properties file :
+artifactory_user=<user>
+artifactory_password=<password>
+artifactory_contextUrl=https://cleardil.jfrog.io/artifactory
+
+
 Add the maven link `android/build.gradle`:
 ```gradle
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+    }
+}
+
 allprojects {
-  repositories {
-    mavenCentral()
-  }
+    apply plugin: "com.jfrog.artifactory"
+}
+
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    resolve {
+        repository {
+            repoKey = 'cleardil-gradle-release'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+        }
+    }
 }
 ```
 
 Enable multidex in `android/app/build.gradle`:
 ```gradle
 android {
-  defaultConfig {
-     multiDexEnabled true
-  }
+    String storageUrl = System.env.FLUTTER_STORAGE_BASE_URL ?: "https://storage.googleapis.com"
+    repositories {
+        maven {
+            url "$storageUrl/download.flutter.io"
+        }
+        maven {
+            url "${artifactory_contextUrl}/cleardil-gradle-release"
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.cleardil.sdk:cleardil_android_sdk:1.2.0'
 }
 ```
+2. Basic calling of Cleardil SDK in your code
+Add a Flutter activity to your AndroidManifest.xml :
+
+<activity
+  android:name="io.flutter.embedding.android.FlutterActivity"
+  android:theme="@android:style/Theme"
+  android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+  android:hardwareAccelerated="true"
+  android:windowSoftInputMode="adjustResize"
+  />
+
+
 </details>
 
 #### 4.3 Update your iOS configuration files

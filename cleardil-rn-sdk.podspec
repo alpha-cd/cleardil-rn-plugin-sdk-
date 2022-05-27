@@ -20,8 +20,7 @@ Pod::Spec.new do |s|
   s.exclude_files = "ios/ClearDilSdkTests/"
   s.requires_arc = true
   s.dependency "React"
-  s.dependency "Onfido", "24.5.0"
-   s.dependency "cleardil_ios_sdk" , "1.1.0"
+   s.dependency "cleardil_ios_sdk" , "1.2.0"
   # ...
   # s.dependency "..."
 end

@@ -20,17 +20,17 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@onfido/react-native-sdk/-/react-native-sdk-5.2.0.tgz",
+  "_resolved": "https://registry.npmjs.org/cleardil/react-native-sdk/-/react-native-sdk-5.2.0.tgz",
   "_shasum": "3af09ed4b3b1162e71f4558733071ccc157b5ed7",
   "_spec": "cleardil-rn-sdk@^5.1.0",
   "_where": "/Users/mss/Downloads/Promethio/Promethio",
   "author": {
     "name": "SDK Customer Support",
-    "email": "react-native-sdk@onfido.com",
-    "url": "https://github.com/onfido"
+    "email": "cleardil-rn-sdk@cleardil.com",
+    "url": "https://github.com/alpha-cd"
   },
   "bugs": {
-    "url": "https://github.com/onfido/react-native-sdk/issues"
+    "url": "https://github.com/alpha-cd/cleardil-rn-plugin-sdk-/issues"
   },
   "bundleDependencies": false,
   "dependencies": {},
@@ -49,7 +49,7 @@
     "react": "17.0.1",
     "react-native": "0.64.3"
   },
-  "homepage": "https://github.com/onfido/react-native-sdk#readme",
+  "homepage": "https://github.com/alpha-cd/cleardil-rn-plugin-sdk-",
   "jest": {
     "transformIgnorePatterns": [
       "/node_modules/(?!react-native|Utilites)"
@@ -94,8 +94,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/onfido/react-native-sdk.git",
-    "baseUrl": "https://github.com/onfido/react-native-sdk"
+    "url": "git+https://github.com/alpha-cd/cleardil-rn-plugin-sdk-.git",
+    "baseUrl": "https://github.com/alpha-cd/cleardil-rn-plugin-sdk-"
   },
   "scripts": {
     "iOSTest": "cd ios && xcodebuild test-without-building -workspace \"ClearDilSdk.xcworkspace\" -scheme \"ClearDilSdkTests\" -destination \"platform=iOS Simulator,name=iPhone 8,OS=13.3\" -only-testing:ClearDilSdkTests",
@@ -105,7 +105,7 @@
     "updateColors": "node scripts/update_colors.js",
     "updateGradleMavenLink": "node scripts/android_add_maven_link.js",
     "updateGradleMultiDex": "node scripts/android_enable_multi_dex.js",
-    "updateOnfido": "npm run updateBuildGradle && npm run updateColors"
+    "updateCleardil": "npm run updateBuildGradle && npm run updateColors"
   },
   "title": "React Native ClearDil Sdk",
   "version": "5.2.0"
