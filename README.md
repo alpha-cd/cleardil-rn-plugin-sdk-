@@ -206,10 +206,12 @@ platform :ios, '10.0'
 * Use latest cocopods version
 * Use following comands to update pod cache
 
+```bash
 sudo gem install cocoapods-clean
 pod deintegrate
 pod clean
 pod install
+```
 
 * Also open ios project as workspace project .xcworkspace
 
