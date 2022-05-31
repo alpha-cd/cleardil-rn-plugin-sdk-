@@ -41,7 +41,7 @@ This SDK provides a drop-in set of screens and tools for react native applicatio
 * Advanced image quality detection technology to ensure the quality of the captured images meets the requirement of the ClearDil identity verification process, guaranteeing the best success rate
 * Direct image upload to the ClearDil service, to simplify integration\*
 
-\* **Note**: the SDK is only responsible for capturing and uploading photos/videos. You still need to access the [ClearDil API](https://documentation.cleardil.com/) to create and manage checks.
+\* **Note**: the SDK is only responsible for capturing and uploading photos/videos. You still need to access the [ClearDil API](https://reference.cleardil.com) to create and manage checks.
 
 * Supports iOS 11+
 * Supports Xcode 13+
@@ -52,11 +52,11 @@ This SDK provides a drop-in set of screens and tools for react native applicatio
 
 ### 1. Obtaining an API token
 
-In order to start integration, you will need the **API token**. You can use our [sandbox](https://documentation.cleardil.com/#sandbox-testing) environment to test your integration, and you will find the API tokens inside your [ClearDil Dashboard](https://cleardil.com/dashboard/api/tokens). You can create API tokens inside your cleardil Dashboard as well.
+In order to start integration, you will need the **API token**. You can use our [sandbox](https://reference.cleardil.com) environment to test your integration, and you will find the API tokens inside your [ClearDil Dashboard](https://docs.cleardil.com). You can create API tokens inside your cleardil Dashboard as well.
 
 ### 2. Creating an Applicant
 
-You must create an ClearDil [applicant](https://documentation.cleardil.com/#applicants) before you start the flow.
+You must create an ClearDil [applicant](https://github.com/alpha-cd/cleardil-rn-sdk/tree/devleop) before you start the flow.
 
 For a document or face check the minimum applicant details required are `firstName` and `lastName`.
 
@@ -202,6 +202,18 @@ Change `ios/Podfile` to use version 10:
 ```
 platform :ios, '10.0'
 ```
+* Use latest ruby version
+* Use latest cocopods version
+* Use following comands to update pod cache
+
+sudo gem install cocoapods-clean
+pod deintegrate
+pod clean
+pod install
+
+* Also open ios project as workspace project .xcworkspace
+
+
 
 Add descriptions for camera and microphone permissions to `ios/YourProjectName/Info.plist`:
 ```xml
@@ -219,7 +231,7 @@ Add descriptions for camera and microphone permissions to `ios/YourProjectName/I
 
 Open Xcode and create an empty swift file in your project root.  For example, if your project is called YourProjectName, you can open it from the command line:
 ```bash
-open ios/YourProjectName.xcodeproj
+open ios/YourProjectName.xcworkspace
 ```
 
 Once Xcode is open, add an empty Swift file:  File > New File > Swift > Next > "SwiftVersion" > Create > Don't create Header.  This will update your iOS configuration with a Swift version.  All changes are automatically saved, so you can close Xcode.
@@ -248,8 +260,6 @@ android {
     }
 }
 ```
-
-This will allow the ClearDil SDK to use okhttp3 v4.9.0 while still using the React Native version defined elsewhere in your app.
 
 ## Usage
 
@@ -321,12 +331,9 @@ config = {
 
 * **`sdkToken`**: Required.  This is the JWT sdk token obtained by making a call to the SDK token API.  See section [Configuring SDK with Tokens](#3-configuring-sdk-with-tokens).
 * **`flowSteps`**: Required.  This object is used to toggle individual screens on and off and set configurations inside the screens.
-* **`welcome`**: Optional.  This toggles the welcome screen on or off.  If omitted, this screen does not appear in the flow.
-  * Valid values: `true`, `false`
 * **`captureDocument`**: Optional. This object contains configuration for the capture document screen. If docType and countryCode are not specified, a screen will appear allowing the user to choose these values.  If omitted, this screen does not appear in the flow.
 * **`docType`**: Required if countryCode is specified.
-  * Valid values in `ClearDilDocumentType`: `PASSPORT`, `DRIVING_LICENCE`, `NATIONAL_IDENTITY_CARD`, `RESIDENCE_PERMIT`, `RESIDENCE_PERMIT`, `VISA`, `WORK_PERMIT`, `GENERIC`.
-    **Note**: `GENERIC` document type doesn't offer an optimised capture experience for a desired document type.
+  * Valid values in `ClearDilDocumentType`: `PASSPORT`, `DRIVING_LICENCE`, `NATIONAL_IDENTITY_CARD`.
 
 
 
@@ -374,20 +381,9 @@ Example
 
 ### 1. Obtaining an API token
 
-All API requests must be made with an API token included in the request headers. You can find your API token (not to be mistaken with the mobile SDK token) inside your [ClearDil Dashboard](https://cleardil.com/dashboard/api/tokens).
+All API requests must be made with an API token included in the request headers. You can find your API token (not to be mistaken with the mobile SDK token) inside your [ClearDil Dashboard](https://reference.cleardil.com).
 
-Refer to the [Authentication](https://documentation.cleardil.com/#authentication) section in the API documentation for details. For testing, you should be using the sandbox, and not the live, token.
-
-### 2. Creating a check
-
-You will need to create a check by making a request to the [create check endpoint](https://documentation.cleardil.com/#create-check), using the applicant id. If you are just verifying a document, you only have to include a [document report](https://documentation.cleardil.com/#document-report) as part of the check. On the other hand, if you are verifying a document and a face photo/live video, you will also have to include a [facial similarity report](https://documentation.cleardil.com/#facial-similarity-report) with the corresponding values: `facial_similarity_photo` for the photo option and `facial_similarity_video` for the video option.
-
-
-**Note**: You can also submit the POST request in JSON format.
-
-You will receive a response containing the check id instantly. As document and facial similarity reports do not always return actual [results](https://documentation.cleardil.com/#results) straightaway, you need to set up a webhook to get notified when the results are ready.
-
-Finally, as you are testing with the sandbox token, please be aware that the results are pre-determined. You can learn more about sandbox responses [here](https://documentation.cleardil.com/#pre-determined-responses).
+Refer to the [Authentication](https://docs.cleardil.com) section in the API documentation for details. For testing, you should be using the sandbox, and not the live, token.
 
 
 
@@ -411,7 +407,7 @@ Here are some helpful resources if you are experiencing dependency conflicts bet
 
 **General advice**
 
-If you see issues, you can try removing `node_modules`, build directories, and cache files. A good tool to help with this is [react-native-clean-project](https://github.com/pmadruga/react-native-clean-project)
+If you see issues, you can try removing `node_modules`, build directories, and cache files. A good tool to help with this is [react-native-clean-project](https://github.com/alpha-cd/cleardil-rn-sdk/tree/devleop)
 ### Discrepancies between underlying ClearDil native SDKs
 
 Below is a list of known differences in expected behavior between the ClearDil Android and iOS SDKs this React Native SDK wraps:
