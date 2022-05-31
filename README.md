@@ -162,7 +162,7 @@ artifactory {
         }
     }
 }
-```
+```README.md
 
 Enable multidex in `android/app/build.gradle`:
 ```gradle
@@ -234,6 +234,11 @@ Add descriptions for camera and microphone permissions to `ios/YourProjectName/I
 Open Xcode and create an empty swift file in your project root.  For example, if your project is called YourProjectName, you can open it from the command line:
 ```bash
 open ios/YourProjectName.xcworkspace
+```
+
+* Add following line in pod file of your project.
+```bash
+pod 'cleardil_ios_sdk', :git => 'https://github.com/ClearDil/cleardil_ios_sdk.git', :tag => '1.2.0'
 ```
 
 Once Xcode is open, add an empty Swift file:  File > New File > Swift > Next > "SwiftVersion" > Create > Don't create Header.  This will update your iOS configuration with a Swift version.  All changes are automatically saved, so you can close Xcode.
